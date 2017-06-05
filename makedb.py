@@ -11,6 +11,13 @@ from __future__ import unicode_literals
 import re
 import sqlite3
 import sys
+import io # for open with encoding support
+
+##############################################################################
+# Default encoding
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 ##############################################################################
 # Fixing characters and umlauts, remove garbage
@@ -33,7 +40,7 @@ def fix(str):
 def fixCity(str):
 	#insert dash
 	pos = re.search("[a-z][A-Z]",str)
-	if pos == None:
+	if pos == None: 
 		return str	
 	else:
 		pos = pos.start()
@@ -88,12 +95,13 @@ print "Callbook date: " + str(callbookdate)
 # Read file and extract call records
 calls = [] #will be the array of call records
 call = ""	#for reading lines
-with open('calls.txt') as f:
+with io.open('calls.txt', encoding='ISO-8859-1') as f:
 	for line in f:		
 		
 		# start with fixing string
 		# form feed character at line beginning yields regexp failure for unknown reason (reported)
-		line = unicode(line, 'utf-8')
+        	#line = unicode(line.decode('latin-1'), 'utf-8')
+        	#line = unicode(line, 'utf-8')
 		line = fix(line)
 		
 		if line == "":

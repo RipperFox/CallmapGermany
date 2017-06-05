@@ -20,7 +20,7 @@ def dict_factory(cursor, row):
 dbconn.row_factory = dict_factory
 dbcursor = dbconn.cursor()
 
-dbcursor.execute("SELECT Lng, Lat FROM Locations WHERE Geocode = 1")
+dbcursor.execute("SELECT Street, Zip FROM Locations WHERE Geocode = 1")
 res = dbcursor.fetchall()
 
 counter = 0
@@ -31,9 +31,10 @@ with open('calls.csv', 'w') as csvfile:
     writer.writeheader()
     
     for row in res:
-    	lng = row['Lng']
-    	lat = row['Lat']
-    	dbcursor.execute("SELECT Call, Class, Name, Street, Zip, City, Lng, Lat FROM CallsComplete WHERE Lat="+str(lat)+" AND Lng= "+str(lng))
+    	street = row['Street']
+    	zip = row['Zip']
+    	query = "SELECT Call, Class, Name, Street, Zip, City, Lng, Lat FROM CallsComplete WHERE Street=\"%s\" AND Zip=\"%s\"" % (street, zip)
+    	dbcursor.execute(query)
     	res = dbcursor.fetchall()
     	label = "<div class='googft-info-window'>"
     	classes = Set([])
@@ -55,6 +56,9 @@ with open('calls.csv', 'w') as csvfile:
     		marker = "small_purple"
     		
     	label = label + "</div>"
+    	lat = current['Lat']
+    	lng = current['Lng']
+
     
     	writer.writerow({'Lng':lng,'Lat':lat, 'Label':label, 'Marker':marker})
 
