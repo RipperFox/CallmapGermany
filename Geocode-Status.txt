@@ -1,0 +1,4 @@
+1 = erfolgreich mit Google
+2 = OSM Nominatim
+3 = OSM photon
+4 = händisch korrigiert
