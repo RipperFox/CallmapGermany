@@ -20,7 +20,7 @@ def dict_factory(cursor, row):
 dbconn.row_factory = dict_factory
 dbcursor = dbconn.cursor()
 
-dbcursor.execute("SELECT Street, Zip FROM Locations WHERE Geocode = 1")
+dbcursor.execute("SELECT Street, Zip FROM Locations WHERE Geocode is not NULL or Geocode <> 0")
 res = dbcursor.fetchall()
 
 counter = 0

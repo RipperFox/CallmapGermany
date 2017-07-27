@@ -11,7 +11,8 @@ import simplekml
 dbconn = sqlite3.connect('calls.db')
 dbcursor = dbconn.cursor()
 
-dbcursor.execute("SELECT * FROM Callsigns WHERE Lng IS NOT NULL AND Lat IS NOT  NULL AND Class IS \"A\"")
+#dbcursor.execute("SELECT * FROM Callsigns WHERE Lng IS NOT NULL AND Lat IS NOT  NULL AND Class IS \"A\"")
+dbcursor.execute("SELECT 1, Call, Class, Name, Street, Zip, City, Lng, Lat FROM CallsComplete WHERE Lng IS NOT NULL AND Lat IS NOT  NULL AND Class IS \"A\"")
 res = dbcursor.fetchall()
 
 print str(len(res))+ " class A call signs with geocode"
@@ -33,7 +34,8 @@ for row in res:
 kml.save('calls-A.kml')
 
 #
-dbcursor.execute("SELECT * FROM Callsigns WHERE Lng IS NOT NULL AND Lat IS NOT  NULL AND Class IS \"E\"")
+#dbcursor.execute("SELECT * FROM Callsigns WHERE Lng IS NOT NULL AND Lat IS NOT  NULL AND Class IS \"E\"")
+dbcursor.execute("SELECT 1, Call, Class, Name, Street, Zip, City, Lng, Lat FROM CallsComplete WHERE Lng IS NOT NULL AND Lat IS NOT  NULL AND Class IS \"E\"")
 res = dbcursor.fetchall()
 
 print str(len(res))+ " class E call signs with geocode"

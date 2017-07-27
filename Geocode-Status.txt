@@ -1,4 +1,4 @@
 1 = erfolgreich mit Google
-2 = OSM Nominatim
-3 = OSM photon
+2 = OSM Nominatim fehlgeschlagen
+3 = OSM photon (evtl. komplett falsch - bei Wien, un USA, etc.)
 4 = händisch korrigiert
